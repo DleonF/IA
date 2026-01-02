@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Géneros</title>
+</head>
+<body>
+
+<h1>🎵 Selecciona un género</h1>
+
+{% for g in generos %}
+    <a href="/subgeneros/{{ g }}">
+        <button style="margin:10px">{{ g }}</button>
+    </a>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canciones</title>
+</head>
+<body>
+
+<h1>{{ subgenero }}</h1>
+
+<div style="display:flex; gap:40px">
+
+    <!-- Lista de canciones -->
+    <div>
+        <h3>Canciones</h3>
+        <form method="post">
+            {% for song, artist in canciones %}
+                <button type="submit" name="song" value="{{ song }}">
+                    🎶 {{ song }} – {{ artist }}
+                </button>
+                <br><br>
+            {% endfor %}
+        </form>
+    </div>
+
+    <!-- Resultado -->
+    <div style="border:2px solid black; padding:20px; width:250px">
+        <h3>Resultado</h3>
+        {% if emocion %}
+            <p><b>Canción:</b> {{ cancion_sel }}</p>
+            <p><b>Emoción:</b> {{ emocion }}</p>
+        {% else %}
+            <p>Selecciona una canción</p>
+        {% endif %}
+    </div>
+
+</div>
+
+<br>
+<a href="/subgeneros/{{ genero }}">⬅ Volver</a>
+
+</body>
+</html>

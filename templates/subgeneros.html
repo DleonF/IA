@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subgéneros</title>
+</head>
+<body>
+
+<h1>{{ genero }}</h1>
+<h3>Selecciona un subgénero</h3>
+
+{% for sg in subgeneros %}
+    <a href="/canciones/{{ genero }}/{{ sg }}">
+        <button style="margin:10px">{{ sg }}</button>
+    </a>
+{% endfor %}
+
+<br><br>
+<a href="/">⬅ Volver</a>
+
+</body>
+</html>
