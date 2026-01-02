@@ -93,7 +93,7 @@ def canciones(genero, subgenero):
         datos_scaled = scaler.transform(datos)
         emocion = knn.predict(datos_scaled)[0]
 
-    return render_template(Ya quedooooo
+    return render_template(
         "canciones.html",
         genero=genero,
         subgenero=subgenero,
