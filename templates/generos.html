@@ -1,17 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Géneros</title>
+    <meta charset="UTF-8">
+    <title>Generos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+<div class="shell">
+    <header class="hero">
+        <p class="eyebrow">Spotify</p>
+        <h1 class="hero-title">Selecciona un genero</h1>
+        <p class="hero-subtitle">Empieza eligiendo un genero principal.</p>
+    </header>
 
-<h1>🎵 Selecciona un género</h1>
-
-{% for g in generos %}
-    <a href="/subgeneros/{{ g }}">
-        <button style="margin:10px">{{ g }}</button>
-    </a>
-{% endfor %}
-
+    <div class="card">
+        <div class="card-header">
+            <h3>Generos</h3>
+            <p class="muted">Pop, Rock, Indie, Hip-Hop</p>
+        </div>
+        <div class="choice-grid">
+            {% for g in generos %}
+                <a class="btn choice-btn" href="/subgeneros/{{ g }}">{{ g }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 </body>
 </html>

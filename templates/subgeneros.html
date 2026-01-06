@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Subgéneros</title>
+    <meta charset="UTF-8">
+    <title>Subgeneros | {{ genero }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+<div class="shell">
+    <header class="hero">
+        <a class="back-link" href="/"><- Volver</a>
+        <p class="eyebrow">Genero</p>
+        <h1 class="hero-title">{{ genero }}</h1>
+        <p class="hero-subtitle">Selecciona un subgenero para ver sus canciones.</p>
+    </header>
 
-<h1>{{ genero }}</h1>
-<h3>Selecciona un subgénero</h3>
-
-{% for sg in subgeneros %}
-    <a href="/canciones/{{ genero }}/{{ sg }}">
-        <button style="margin:10px">{{ sg }}</button>
-    </a>
-{% endfor %}
-
-<br><br>
-<a href="/">⬅ Volver</a>
-
+    <div class="card">
+        <div class="card-header">
+            <h3>Subgeneros</h3>
+            <p class="muted">Explora estilos relacionados</p>
+        </div>
+        <div class="choice-grid">
+            {% for sg in subgeneros %}
+                <a class="btn choice-btn" href="/canciones/{{ genero }}/{{ sg }}">{{ sg }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+

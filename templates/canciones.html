@@ -1,42 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Canciones</title>
+    <meta charset="UTF-8">
+    <title>Canciones | {{ subgenero }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+<div class="shell">
+    <header class="hero">
+        <a class="back-link" href="/subgeneros/{{ genero }}"><- Volver</a>
+        <p class="eyebrow">Subgenero</p>
+        <h1 class="hero-title">{{ subgenero }}</h1>
+        <p class="hero-subtitle">Elige una cancion para predecir la emocion.</p>
+    </header>
 
-<h1>{{ subgenero }}</h1>
+    <div class="grid two-columns">
+        <div class="card">
+            <div class="card-header">
+                <h3>Canciones</h3>
+                <p class="muted">Top 15</p>
+            </div>
+            <form method="post" class="list">
+                {% for song, artist in canciones %}
+                    <button class="song-btn" type="submit" name="song" value="{{ song }}">
+                        <span class="song-title">{{ song }}</span>
+                        <span class="song-artist">{{ artist }}</span>
+                    </button>
+                {% endfor %}
+            </form>
+        </div>
 
-<div style="display:flex; gap:40px">
-
-    <!-- Lista de canciones -->
-    <div>
-        <h3>Canciones</h3>
-        <form method="post">
-            {% for song, artist in canciones %}
-                <button type="submit" name="song" value="{{ song }}">
-                    🎶 {{ song }} – {{ artist }}
-                </button>
-                <br><br>
-            {% endfor %}
-        </form>
+        <div class="card">
+            <h3 class="result-title">Resultado</h3>
+            {% if emocion %}
+                <p><b>Cancion:</b> {{ cancion_sel }}</p>
+                <p><b>Emocion:</b> <span class="pill">{{ emocion }}</span></p>
+            {% else %}
+                <p class="muted">Selecciona una cancion para ver su emocion.</p>
+            {% endif %}
+        </div>
     </div>
-
-    <!-- Resultado -->
-    <div style="border:2px solid black; padding:20px; width:250px">
-        <h3>Resultado</h3>
-        {% if emocion %}
-            <p><b>Canción:</b> {{ cancion_sel }}</p>
-            <p><b>Emoción:</b> {{ emocion }}</p>
-        {% else %}
-            <p>Selecciona una canción</p>
-        {% endif %}
-    </div>
-
 </div>
-
-<br>
-<a href="/subgeneros/{{ genero }}">⬅ Volver</a>
-
 </body>
 </html>
+
+
