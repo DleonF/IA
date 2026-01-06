@@ -13,15 +13,73 @@
         <p class="hero-subtitle">Empieza eligiendo un genero principal.</p>
     </header>
 
-    <div class="card">
-        <div class="card-header">
-            <h3>Generos</h3>
-            <p class="muted">Pop, Rock, Indie, Hip-Hop</p>
+    <div class="grid">
+        <div class="card">
+            <div class="card-header">
+                <h3>Busqueda</h3>
+                <p class="muted">Canciones o artistas</p>
+            </div>
+            <form method="get" class="search-bar" action="{{ url_for('generos') }}">
+                <input class="search-input" type="text" name="q" value="{{ q }}" placeholder="Busca por cancion o artista">
+                <button class="search-btn" type="submit">Buscar</button>
+            </form>
+            {% if q %}
+                <p class="muted">Resultados para "{{ q }}"</p>
+                {% if resultados %}
+                    <div class="list">
+                        {% for r in resultados %}
+                            <form method="post" action="{{ url_for('generos') }}">
+                                <input type="hidden" name="q" value="{{ q }}">
+                                <input type="hidden" name="song" value="{{ r.song }}">
+                                <input type="hidden" name="artist" value="{{ r.artist }}">
+                                <input type="hidden" name="subgenero" value="{{ r.subgenero }}">
+                                <button class="song-btn" type="submit">
+                                    <span class="song-title">{{ r.song }}</span>
+                                    <span class="song-artist">{{ r.artist }} • {{ r.subgenero }}</span>
+                                </button>
+                            </form>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="muted">Sin resultados.</p>
+                {% endif %}
+            {% endif %}
         </div>
-        <div class="choice-grid">
-            {% for g in generos %}
-                <a class="btn choice-btn" href="/subgeneros/{{ g }}">{{ g }}</a>
-            {% endfor %}
+
+        {% if emocion %}
+            <div class="card">
+                <h3 class="result-title">Resultado</h3>
+                <p><b>Cancion:</b> {{ cancion_sel }}</p>
+                <p><b>Artista:</b> {{ artista_sel }}</p>
+                <p><b>Emocion:</b> <span class="pill">{{ emocion }}</span></p>
+                {% if confianza is not none %}
+                    <p><b>Confianza:</b> {{ (confianza * 100) | round(1) }}%</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Generos</h3>
+                <p class="muted">Pop, Rock, Indie, Hip-Hop</p>
+            </div>
+            <div class="choice-grid">
+                {% for g in generos %}
+                    <a class="btn choice-btn" href="/subgeneros/{{ g }}">{{ g }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Emociones</h3>
+                <p class="muted">Canciones mas apegadas por emocion</p>
+            </div>
+            <div class="choice-grid">
+                {% for e in emociones %}
+                    <a class="btn choice-btn" href="/emociones/{{ e.value }}">{{ e.label }}</a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

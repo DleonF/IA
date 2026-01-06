@@ -34,6 +34,36 @@ body {
 .card-header { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 10px; }
 .card h3 { margin: 0; }
 .muted { color: var(--muted); margin: 0; }
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0 14px;
+}
+.search-input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--stroke);
+    background: rgba(255,255,255,0.03);
+    color: var(--text);
+    outline: none;
+}
+.search-input:focus { border-color: rgba(78,205,196,0.7); }
+.search-btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--stroke);
+    background: linear-gradient(135deg, rgba(78,205,196,0.25), rgba(155,93,229,0.25));
+    color: var(--text);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+.search-btn:hover {
+    border-color: rgba(78,205,196,0.75);
+    box-shadow: 0 6px 18px rgba(78,205,196,0.15);
+    transform: translateY(-1px);
+}
 .list { display: grid; gap: 10px; margin-top: 6px; }
 .song-btn {
     width: 100%;
@@ -47,6 +77,7 @@ body {
     background: rgba(255,255,255,0.02);
     color: var(--text);
     text-align: left;
+    text-decoration: none;
     cursor: pointer;
     transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
 }

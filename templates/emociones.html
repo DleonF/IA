@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Emocion | {{ emocion }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="shell">
+    <header class="hero">
+        <a class="back-link" href="/"><- Volver</a>
+        <p class="eyebrow">Emocion</p>
+        <h1 class="hero-title">{{ emocion }}</h1>
+        <p class="hero-subtitle">Canciones mas apegadas a esta emocion.</p>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-header">
+                <h3>Canciones</h3>
+                <p class="muted">(Mayor probabilidad)</p>
+            </div>
+            <div class="list">
+                {% for song, artist, confianza in canciones %}
+                    <div class="song-btn">
+                        <span class="song-title">{{ song }}</span>
+                        <span class="song-artist">{{ artist }}</span>
+                        {% if confianza is not none %}
+                            <span class="song-artist">Probabilidad: {{ (confianza * 100) | round(1) }}%</span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                {% if not canciones %}
+                    <p class="muted">Sin canciones para esta emocion.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
